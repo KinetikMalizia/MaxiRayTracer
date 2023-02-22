@@ -6,7 +6,7 @@
 #    By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 12:41:46 by nnemeth           #+#    #+#              #
-#    Updated: 2023/01/27 15:53:57 by nnemeth          ###   ########.fr        #
+#    Updated: 2023/02/21 15:39:12 by nnemeth          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ LIB			= Libft/libft/libft.a
 
 CC			= gcc
 
-CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address 
+CFLAGS		= -Wall -Wextra -Werror -g3 #-fsanitize=address 
 
 SRCS		= $(wildcard *.c)
 

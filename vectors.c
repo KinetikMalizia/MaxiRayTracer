@@ -6,7 +6,7 @@
 /*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:39 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/08 12:52:45 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/02/21 16:09:56 by nnemeth          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ double	getnorm(t_vector vector)
 		+ vector.z * vector.z);
 }
 
-void	normalize(t_vector vector)
+t_vector	normalize(t_vector vector)
 {
-	double	norm;
+	float	norm;
 
 	norm = sqrt(getnorm(vector));
 	vector.x /= norm;
 	vector.y /= norm;
 	vector.z /= norm;
+	return (vector);
 }
 
 double	dot(t_vector ray_dir, t_vector ray_o)
@@ -44,12 +45,9 @@ t_vector	minus(t_vector origin, t_vector position)
 	return (new);
 }
 
-t_vector	ft_minus(t_vector v1, t_vector v2)
+void	reverse_vector(t_vector *vec)
 {
-	t_vector	new;
-
-	new.x = v1.x - v2.x;
-	new.y = v1.y - v2.y;
-	new.z = v1.z - v2.z;
-	return (new);
+	vec->x *= -1;
+	vec->y *= -1;
+	vec->z *= -1;
 }

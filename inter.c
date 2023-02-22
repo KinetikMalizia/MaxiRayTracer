@@ -6,7 +6,7 @@
 /*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/08 12:41:24 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/02/22 10:59:29 by nnemeth          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,51 +19,64 @@ int	inter_sphere(t_rays *rays)
 	float		c;
 	float		delta;
 	t_vector	oc;
-	double		t;
+	float 		d;
+	t_vector	color;
 
+	color.x = 1;
+	color.y = 0;
+	color.z = 0;
 	oc = minus(rays->ray_orig, rays->sphere.sph_cord);
-	a = getnorm(rays->ray_dir);
-	b = 2 * (dot(oc, rays->ray_dir));
+	a = dot(rays->ray_dir, rays->ray_dir);
+	b = 2.0f * (dot(oc, rays->ray_dir));
 	c = dot(oc, oc) - (rays->sphere.sphere_rad * rays->sphere.sphere_rad);
 	delta = (b * b) - (4 * a * c);
 	if (delta < 0)
 		return (FALSE);
-	rays->t1 = (-b - sqrtf(delta)) / (2);
-	rays->t2 = (-b + sqrtf(delta)) / (2);
-	if (rays->t2 < 0)
+	rays->t1 = (-b + sqrt(delta)) / (2 * a);
+	rays->t2 = (-b - sqrt(delta)) / (2 * a);
+	if (rays->t1 < 0)
 		return (FALSE);
-	if (rays->t1 > 0)
-		t = rays->t1;
+	if (rays->t2 > 0)
+		rays->t = rays->t2;
 	else
-		t = rays->t2;
-	rays->light.p = (rays->ray_orig) + (t * rays->ray_dir);
-	rays->light.n = (rays->light.p * (normalize(rays->sphere.sph_cord)));
+		rays->t = rays->t1;
+	rays->light.p = (ft_plus((rays->ray_orig), ft_mult(rays->t, rays->ray_dir)));
+	rays->light.n = normalize((minus(rays->light.p, rays->sphere.sph_cord)));
+	rays->light.light_dir = normalize(rays->light.light_dir);
+	d = (dot(rays->light.n, ft_mult(-1, rays->light.light_dir)));
+	rays->light.n = ft_mult(d, color);
+	return (TRUE);
+}
+
+//www.google.com/search?q=rendering+a+sphere+in+c+language&oq=
+//rendering+a+sphere+in+c+&aqs=chrome.3.69i57j33i160l3.9737j1j7&sourceid=chrome&
+//ie=UTF-8#fpstate=ive&vld=cid:86a89d49,vid:v9vndyfk2U8
+
+int	inter_plane(t_rays *rays)
+{
+	float		denom;
+	t_vector	oc;
+	float		t;
+	// float 		d;	
+	rays->plan.plan_orient = normalize(rays->plan.plan_orient);
+	rays->plan.plan_pos = normalize(rays->plan.plan_pos);
+	denom = dot(rays->ray_dir, rays->plan.plan_orient);
+	oc = minus(rays->plan.plan_pos, rays->ray_orig);
+	t = dot(oc, rays->plan.plan_orient) / denom;
+	if (t >= 0.0)
+	{
+		// printf("%f\n", t);
+		rays->light.p = (ft_plus((rays->ray_orig), ft_mult(rays->t, rays->ray_dir)));
+		rays->light.n = rays->plan.plan_orient;
+		// d = (dot(rays->light.n, ft_mult(-1, rays->light.light_dir)));
+		// rays->light.n = ft_mult(d, rays->light.albedo);
+		normalize((minus(rays->light.p, rays->plan.plan_orient)));
+		return (TRUE);
+	}
 	return (FALSE);
 }
 
-void	set_scene(t_rays *rays)
-{
-	int		bckclr;
-
-	bckclr = 0.28 * (rays->win_i + 1);
-	bckclr += ((1 - bckclr) * color(0.5, 0.7, 1) - (bckclr * color(1, 1, 1)));
-	my_mlx_pixel_put(rays, rays->win_y, rays->win_i,
-		ray_color(bckclr, 135, 206, 235));
-	rays->ray_orig.x = rays->cam.pos.x;
-	rays->ray_orig.y = rays->cam.pos.y;
-	rays->ray_orig.z = rays->cam.pos.z;
-	rays->ray_dir.x = ((float)rays->win_y - W / 2);
-	rays->ray_dir.y = ((float)rays->win_i - W / 2);
-	rays->ray_dir.z = -W / (2 * tan(rays->cam.cam_fov / 2));
-	normalize(rays->ray_dir);
-}
-// P[t] = A + tb
-//A = ray origin as in camera coordinates
-//b = ray direction
-//P = 3d position along a line
-
-// 1) calculate the ray from the eye to the pixel 
-// 2) determine which objects the ray intersects
-// 3) compute a color for that intersection point 
-
-// https://www.google.com/search?q=rendering+a+sphere+in+c+language&oq=rendering+a+sphere+in+c+&aqs=chrome.3.69i57j33i160l3.9737j1j7&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:86a89d49,vid:v9vndyfk2U8
+// int	routine_inter(t_rays *rays)
+// {
+	
+// }
