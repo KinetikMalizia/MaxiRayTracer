@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/22 10:59:29 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/02/22 17:10:02 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	inter_plane(t_rays *rays)
 	float		denom;
 	t_vector	oc;
 	float		t;
-	// float 		d;	
 	rays->plan.plan_orient = normalize(rays->plan.plan_orient);
 	rays->plan.plan_pos = normalize(rays->plan.plan_pos);
 	denom = dot(rays->ray_dir, rays->plan.plan_orient);
@@ -74,6 +73,43 @@ int	inter_plane(t_rays *rays)
 		return (TRUE);
 	}
 	return (FALSE);
+}
+
+int	inter_cylinder(t_rays *rays)
+{
+	float		a;
+	float		b;
+	float		c;
+	float		delta;
+	float		m;
+	float		d;
+	t_vector	vm;
+	t_vector	oc;
+
+	oc = minus(rays->ray_orig, rays->cyl.cyl_cord);
+	rays->cyl.cyl_vec = normalize(rays->cyl.cyl_vec);
+	a = dot(rays->ray_dir, rays->ray_dir) - powf(dot(rays->ray_dir, rays->cyl.cyl_vec), 2);
+	b = 2.0f * (dot(rays->ray_dir, oc) - (dot(rays->ray_dir, rays->cyl.cyl_vec) * dot(oc, rays->cyl.cyl_vec)));
+	c = dot(oc, oc) - powf(dot(oc, rays->cyl.cyl_vec), 2) - powf(rays->cyl.dia / 2, 2);
+	delta = (b * b) - (4 * a * c);
+	if (delta < 0)
+		return (FALSE);
+	rays->t1 = (-b + sqrt(delta)) / (2 * a);
+	rays->t2 = (-b - sqrt(delta)) / (2 * a);
+	if (rays->t2 > 0)
+		rays->t = rays->t2;
+	else
+		rays->t = rays->t1;
+	rays->light.p = (ft_plus((rays->ray_orig), ft_mult(rays->t, rays->ray_dir)));
+	m = (dot(rays->ray_dir, rays->cyl.cyl_vec) * rays->t) + dot(oc, rays->cyl.cyl_vec);
+	if (m < 0 || m > rays->cyl.height)
+		return (FALSE);
+	vm = ft_mult(m, rays->cyl.cyl_vec);
+	rays->light.n =	normalize(minus(minus(rays->light.p, rays->cyl.cyl_cord), vm));
+	rays->light.light_dir = normalize(rays->light.light_dir);
+	d = (dot(rays->light.n, ft_mult(-1, rays->light.light_dir)));
+	rays->light.n = ft_mult(d, rays->cyl.cyl_clr);
+	return(TRUE);
 }
 
 // int	routine_inter(t_rays *rays)

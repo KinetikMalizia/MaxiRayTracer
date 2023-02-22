@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/21 16:13:27 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/02/22 17:07:27 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ typedef struct S_light
 typedef struct S_cyl
 {
 	t_vector	cyl_vec;
-	t_color		cyl_clr;
-	t_coord		cyl_cord;
+	t_vector	cyl_clr;
+	t_vector	cyl_cord;
 	double		dia;
 	double		height;
 }	t_cyl;
@@ -167,5 +167,6 @@ int			inter_plane(t_rays *rays);
 t_vector	add_amb(t_rays *rays);
 t_vector	add_values(double x, double y, double z);
 void		reverse_vector(t_vector *vec);
+int			inter_cylinder(t_rays *rays);
 
 #endif

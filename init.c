@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikki <nikki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:14:48 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/18 10:54:48 by nikki            ###   ########.fr       */
+/*   Updated: 2023/02/22 16:18:57 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ void	set_scene(t_rays *rays)
 	rays->ray_dir.x = ((float)rays->win_y - W / 2);
 	rays->ray_dir.y = ((float)rays->win_i - H / 2);
 	rays->ray_dir.z = -W / (2 * tan(rays->cam.cam_fov / 2));
-	// normalize(rays->ray_dir);
+	normalize(rays->ray_dir);
 }

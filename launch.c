@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:31:27 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/22 11:01:05 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/02/22 17:03:57 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	load_scene(t_rays *rays)
 		while (rays->win_y < W)
 		{
 			set_scene(rays);
-			hit = inter_plane(rays);
+			hit = inter_cylinder(rays);
 			hit2 = inter_sphere(rays);
 			if (hit == TRUE || hit2 == TRUE)
 			{
 				// rays->light.n = get_light(rays);
 				rays->light.n = add_amb(rays);
-				my_mlx_pixel_put(rays, rays->win_y, rays->win_i,
-					color(100, 0, 70));
+				// my_mlx_pixel_put(rays, rays->win_y, rays->win_i,
+				// 	color(100, 0, 70));
 				my_mlx_pixel_put(rays, rays->win_y, (H - rays->win_i - 1),
 					color((ft_max((rays->light.n.x))), ft_max(((rays->light.n.y))), ft_max((rays->light.n.z))));
 				// my_mlx_pixel_put(rays, rays->win_y, (H - rays->win_i - 1),

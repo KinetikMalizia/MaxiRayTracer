@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/21 16:25:26 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/02/22 17:08:48 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ t_rays	*init_struct(void)
 	rays->plan.plan_pos.x = 0;
 	rays->plan.plan_pos.y = 10;
 	rays->plan.plan_pos.z = -20;
+	/*Cylindre*/
+	rays->cyl.cyl_cord.x = 0;
+	rays->cyl.cyl_cord.y = -15;
+	rays->cyl.cyl_cord.z = -50;
+	rays->cyl.cyl_clr.x = 1;
+	rays->cyl.cyl_clr.y = 0;
+	rays->cyl.cyl_clr.z = 0;
+	rays->cyl.cyl_vec.x = 0;
+	rays->cyl.cyl_vec.y	= 0.5;
+	rays->cyl.cyl_vec.z = 0.5;
+	rays->cyl.dia = 10;
+	rays->cyl.height = 30;
 	return (rays);
 }
 
