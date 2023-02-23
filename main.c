@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/22 17:08:48 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/23 12:51:36 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ t_rays	*init_struct(void)
 	t_rays	*rays;
 
 	rays = malloc(sizeof(t_rays) + 1);
-	rays->a_light_ratio = 0.7;
+	rays->a_light_ratio = 0.99;
 	rays->a_light_color.col_b = 0.8;
 	rays->a_light_color.col_g = 0.8;
 	rays->a_light_color.col_r = 0.8;
 	rays->map = NULL;
 	rays->sphere.sph_cord.x = 0;
-	rays->sphere.sph_cord.y = 0;
-	rays->sphere.sph_cord.z = -30;
+	rays->sphere.sph_cord.y = 3;
+	rays->sphere.sph_cord.z = -32;
 	rays->sphere.sphere_dia = 12.6;
-	rays->sphere.sphere_rad = 5.5;
+	rays->sphere.sphere_rad = 5;
 	rays->cam.pos.x = 0;
 	rays->cam.pos.y = 0;
 	rays->cam.pos.z = 1;
@@ -51,17 +51,17 @@ t_rays	*init_struct(void)
 	rays->plan.plan_pos.y = 10;
 	rays->plan.plan_pos.z = -20;
 	/*Cylindre*/
-	rays->cyl.cyl_cord.x = 0;
-	rays->cyl.cyl_cord.y = -15;
-	rays->cyl.cyl_cord.z = -50;
-	rays->cyl.cyl_clr.x = 1;
+	rays->cyl.cyl_cord.x = -10;
+	rays->cyl.cyl_cord.y = 0;
+	rays->cyl.cyl_cord.z = -30;
+	rays->cyl.cyl_clr.x = 0.2;
 	rays->cyl.cyl_clr.y = 0;
-	rays->cyl.cyl_clr.z = 0;
-	rays->cyl.cyl_vec.x = 0;
-	rays->cyl.cyl_vec.y	= 0.5;
-	rays->cyl.cyl_vec.z = 0.5;
-	rays->cyl.dia = 10;
-	rays->cyl.height = 30;
+	rays->cyl.cyl_clr.z = 0.7;
+	rays->cyl.cyl_vec.x = 0.5;
+	rays->cyl.cyl_vec.y	= 0;
+	rays->cyl.cyl_vec.z = 0;
+	rays->cyl.dia = 5;
+	rays->cyl.height = 20;
 	return (rays);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:31:27 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/22 17:03:57 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/23 10:48:32 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	load_scene(t_rays *rays)
 		rays->win_y = 0;
 		while (rays->win_y < W)
 		{
+			rays->t = 100000;
+			rays->t = 100000;
+			rays->t = 100000;
 			set_scene(rays);
 			hit = inter_cylinder(rays);
 			hit2 = inter_sphere(rays);

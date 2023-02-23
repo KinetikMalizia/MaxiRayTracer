@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/22 17:10:02 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/23 12:51:38 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	inter_sphere(t_rays *rays)
 		return (FALSE);
 	rays->t1 = (-b + sqrt(delta)) / (2 * a);
 	rays->t2 = (-b - sqrt(delta)) / (2 * a);
+	if (rays->t2 > rays->t)
+		return (FALSE);
 	if (rays->t1 < 0)
 		return (FALSE);
 	if (rays->t2 > 0)
@@ -96,6 +98,8 @@ int	inter_cylinder(t_rays *rays)
 		return (FALSE);
 	rays->t1 = (-b + sqrt(delta)) / (2 * a);
 	rays->t2 = (-b - sqrt(delta)) / (2 * a);
+	if (rays->t2 > rays->t)
+		return (FALSE);
 	if (rays->t2 > 0)
 		rays->t = rays->t2;
 	else
