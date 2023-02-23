@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/22 17:07:27 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/23 13:44:28 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <math.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <ctype.h>
 # include "minilibx/mlx.h"
 # include "Libft/libft/libft.h"
 
@@ -168,5 +169,76 @@ t_vector	add_amb(t_rays *rays);
 t_vector	add_values(double x, double y, double z);
 void		reverse_vector(t_vector *vec);
 int			inter_cylinder(t_rays *rays);
+
+
+//---------------------//
+/*
+
+char		*readfile(char *filename); //read all the file and return it as a big str
+char		**split_string(const char *str, char sep); //take a string, split the elements every <sep> and return all the elements as a tab
+void		convert_tab(char **tab, t_data *data); //take a tab that contains string, split them and save them in a struct.
+void		print_tab(char **tab); //print a tab
+int			ft_stoi(char *str); //convert str to int
+float		ft_strtof(const char* str); //convert str to float
+int 		ft_strinstr(const char* str, const char* substr);//check if there is a specified str in another str
+void		free_tab(char **tab);//free a tab
+char 		*ft_strcpy(char *dest, char *src, size_t dest_size);
+char 		*ft_strncpy(char *dest, const char *src, size_t n);
+char 		*ft_realloc(char *org, int n_size);
+int			contains_alpha(char* str);
+
+#define BUFSIZE 1024
+
+typedef struct s_color
+{
+	double	col_r;
+	double	col_g;
+	double	col_b;
+}	t_color;
+
+typedef struct s_vector
+{
+	float	x;
+	float	y;
+	float	z;
+}	t_vector;
+
+typedef struct s_form
+{
+	char		*type;
+	t_vector	coord;
+	t_color		color;
+	t_vector	orient;
+	float		sphere_rad;
+	float		cyl_dia;
+	float		cyl_height;
+	struct s_form *next;
+}	t_form;
+
+typedef struct s_cam
+{
+	t_vector 	coord;
+	t_vector 	orient;
+	int			fov;
+}	t_cam;
+
+typedef struct s_light
+{
+	char			type;
+	t_vector		coord;
+	t_color			color;
+	float 			ratio;
+	struct s_light 	*next;
+}	t_light;
+
+typedef struct s_data
+{
+	int 	element;
+	t_form	object;
+	t_cam	camera;
+	t_light	light;
+}	t_data;
+
+*/
 
 #endif

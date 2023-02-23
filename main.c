@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/23 12:51:36 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/23 13:54:22 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_rays	*init_struct(void)
 	// rays->cam.cam.y = 30;
 	// rays->cam.cam.z = 20;
 	rays->cam.cam_fov = 45 * (M_PI / 180);
+	/*Light*/
 	rays->light.light_point.x = 10;
 	rays->light.light_point.y = 20;
 	rays->light.light_point.z = -40;
@@ -44,12 +45,13 @@ t_rays	*init_struct(void)
 	rays->light.albedo.x = 1;
 	rays->light.albedo.y = 0;
 	rays->light.albedo.z = 1;
-	rays->plan.plan_orient.x = 0;
-	rays->plan.plan_orient.y = 0;
-	rays->plan.plan_orient.z = -1;
-	rays->plan.plan_pos.x = 0;
-	rays->plan.plan_pos.y = 10;
-	rays->plan.plan_pos.z = -20;
+	/*Plan*/
+	rays->plan.plan_orient.x = 0.5;
+	rays->plan.plan_orient.y = 0.5;
+	rays->plan.plan_orient.z = 0;
+	rays->plan.plan_pos.x = 5;
+	rays->plan.plan_pos.y = 0;
+	rays->plan.plan_pos.z = -10;
 	/*Cylindre*/
 	rays->cyl.cyl_cord.x = -10;
 	rays->cyl.cyl_cord.y = 0;
@@ -59,7 +61,7 @@ t_rays	*init_struct(void)
 	rays->cyl.cyl_clr.z = 0.7;
 	rays->cyl.cyl_vec.x = 0.5;
 	rays->cyl.cyl_vec.y	= 0;
-	rays->cyl.cyl_vec.z = 0;
+	rays->cyl.cyl_vec.z = 0.5;
 	rays->cyl.dia = 5;
 	rays->cyl.height = 20;
 	return (rays);
